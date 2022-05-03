@@ -16,24 +16,36 @@ public class GridManager : MonoBehaviour
     public int collumns, rows;
 
     //1.4- Arrays and Lists
-    int[,] tilesIntArray;
-    GameObject[,] tilesGoArray;
-    public Node[,] graph;
+    int[,] tilesStateArray; //will be used to store the state of the tiles between: Deep Sea: 0, Shallow Sea: 1, and Base: 2
+    public GameObject[,] tilesGoArray; //is used to store the game object of each tile to access and change it
+
+    int[,] tilesPathArray; //will be used to store the deep sea tiles that will be used by the boats. Will be used: 0, and will not be used: 1
+    int[,] tilesDetecPathArray; // will be used to store the tiles that are for the possition where the boat will stop and check for the player's buildings
+
+    //public Node[,] graph;
+
 
     //2- Void Awake
     private void Awake()
     {
         //2.1- Setting up the Arrays
-        tilesIntArray = new int[collumns, rows];
+        tilesStateArray = new int[collumns, rows];
         tilesGoArray = new GameObject[collumns, rows];
-
-        GeneratePathfindingGraph();
+        tilesPathArray = new int[collumns, rows];
+        tilesDetecPathArray = new int[collumns, rows];
 
         GenerateGrid();
 
+        /*GeneratingShallowSea();
+
+        GeneratingEnnemiesPath();
+
+        CreatingEnnemiesDetection();*/
+
     }
 
-    //3- Generating Pathfinding
+    #region OLD Path Finding
+    /*//3- Generating Pathfinding
     void GeneratePathfindingGraph()
     {
 
@@ -94,9 +106,10 @@ public class GridManager : MonoBehaviour
             }
         }
 
-    }
+    }*/
+    #endregion
 
-    //4- Generate grid
+    //3- Generate grid
     void GenerateGrid()
     {
 
@@ -131,13 +144,14 @@ public class GridManager : MonoBehaviour
 
     }
 
-    //5- A Vector 3 to calculate coordinate in case the grid moves or the scale changes
+    //4- A Vector 3 to calculate coordinate in case the grid moves or the scale changes
     public Vector3 TileCoordToWorldCoord(int x, float y, int z)
     {
         return new Vector3(x, y, z); //rn the tiles have the same coordinates in arrays than in the world
     }
 
-    //6- Cost to Enter a tile
+    #region OLD Path Finding (cost to enter Tile)
+    /*//6- Cost to Enter a tile
     public float CostToEnterTile(int sourceX, int sourceZ, int targetX, int targetZ)
     {
 
@@ -159,6 +173,62 @@ public class GridManager : MonoBehaviour
                 return _thisTile.GetComponent<Tile>().moveCost = 1;
         }
 
+    }*/
+    #endregion
+
+    #region Level Design
+    //5- Creating the level Design
+    //5.1- Creating the deep and shalow sea tiles
+    void GeneratingShallowSea()
+    {
+
+        for (int x = 0; x < collumns; x++)
+        {
+
+            for (int z = 0; z < rows; z++)
+            {
+
+
+
+            }
+
+        }
+
     }
+    //5.2- Creating the path for the ennemies
+    void GeneratingEnnemiesPath()
+    {
+
+        for (int x = 0; x < collumns; x++)
+        {
+
+            for (int z = 0; z < rows; z++)
+            {
+
+
+
+            }
+
+        }
+
+    }
+    //5.3- Creating points where the boats will check for buildings
+    void CreatingEnnemiesDetection()
+    {
+
+        for (int x = 0; x < collumns; x++)
+        {
+
+            for (int z = 0; z < rows; z++)
+            {
+
+
+
+            }
+
+        }
+
+    }
+    #endregion
 
 }
