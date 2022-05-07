@@ -53,10 +53,7 @@ public class Tile : MonoBehaviour
     private void Start()
     {
         
-        this.GetComponent<MeshRenderer>().material = seaMaterial;
-
-        isWalkable = true;
-        isDeepSea = true;
+        
 
     }
 
@@ -74,7 +71,7 @@ public class Tile : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.LogWarning("tile painted : " + tileX + "," + tileZ);
+
             paintingTiles();
             checkingTiles();
 
@@ -211,9 +208,6 @@ public class Tile : MonoBehaviour
 
                     GameObject tileToCheck = grid.tilesGoArray[tileX + Mathf.RoundToInt(n.x) * i, tileZ + Mathf.RoundToInt(n.y) * i]; //because n is a vector and vectors values are float, I needed to make them convert to int, and i is to check surrounding tiles
 
-                    print("tileToCheck : " + tileToCheck.GetComponent<Tile>().tileX + "," + tileToCheck.GetComponent<Tile>().tileZ);
-                    print("tileToCheck is beach: " + tileToCheck.GetComponent<Tile>().isBeach);
-
                     //If the tile is a beach it will chek the surroudning tiles to be sure they are as well
                     if (tileToCheck.GetComponent<Tile>().isBeach == true)
                     {
@@ -224,9 +218,6 @@ public class Tile : MonoBehaviour
                         {
 
                             GameObject _tileToCheck = grid.tilesGoArray[tileToCheck.GetComponent<Tile>().tileX + Mathf.RoundToInt(m.x), tileToCheck.GetComponent<Tile>().tileZ + Mathf.RoundToInt(m.y)]; //changed the reference tile to the tile we are currently checking
-
-                            print("_tileToCheck : " + _tileToCheck.GetComponent<Tile>().tileX + "," + _tileToCheck.GetComponent<Tile>().tileZ);
-                            print("_tileToCheck is beach: " + _tileToCheck.GetComponent<Tile>().isBeach);
 
                             //If the tile is a beach it will chek the neighbouring tiles to be sure they are as well
                             if (_tileToCheck.GetComponent<Tile>().isBeach == true || _tileToCheck.GetComponent<Tile>().isPlain == true)

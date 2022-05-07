@@ -169,6 +169,7 @@ MonoBehaviour:
   tile: {fileID: 3567703651406137820, guid: 03d56596654fb464bbe285760f78d08d, type: 3}
   collumns: 100
   rows: 100
+  levelDesign: {fileID: 11400000, guid: 749bad08273dba2409cf4cf717153b6d, type: 2}
 --- !u!1 &319599889
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319599889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 433.63354, y: 41.88208, z: 208.23242}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

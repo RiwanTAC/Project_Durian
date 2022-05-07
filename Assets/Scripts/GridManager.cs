@@ -22,6 +22,9 @@ public class GridManager : MonoBehaviour
     int[,] tilesPathArray; //will be used to store the deep sea tiles that will be used by the boats. Will be used: 0, and will not be used: 1
     int[,] tilesDetecPathArray; // will be used to store the tiles that are for the possition where the boat will stop and check for the player's buildings
 
+    //1.5- Level Design
+    public LevelDesign levelDesign;
+
     //public Node[,] graph;
 
 
@@ -33,6 +36,9 @@ public class GridManager : MonoBehaviour
         tilesGoArray = new GameObject[collumns, rows];
         tilesPathArray = new int[collumns, rows];
         tilesDetecPathArray = new int[collumns, rows];
+
+        tilesStateArray = levelDesign.tilesStateArray;
+        print(levelDesign.tilesStateArray.Length);
 
         GenerateGrid();
 
@@ -138,13 +144,35 @@ public class GridManager : MonoBehaviour
 
                 ct.gm = this.gm;
 
+                //will be used to store the state of the tiles between: Deep Sea: 0, Shallow Sea: 1, and Base: 2
+                if (tilesStateArray[x, z] == 2)
+                {
+                    ct.isBase = true;
+                    ct.isPlain = true;
+                    ct.GetComponent<MeshRenderer>().material = ct.plainMaterial;
+                }
+                else if (tilesStateArray[x, z] == 1)
+                {
+                    ct.isShallowSea = true;
+                    ct.GetComponent<MeshRenderer>().material = ct.shallowSeaMaterial;
+                }
+                else if (tilesStateArray[x, z] == 0)
+                {
+                    ct.isDeepSea = true;
+                    ct.GetComponent<MeshRenderer>().material = ct.seaMaterial;
+                }
+                else
+                {
+                    Debug.Log("we have a problem captain");
+                }
+
             }
 
         }
 
     }
 
-    //4- A Vector 3 to calculate coordinate in case the grid moves or the scale changes
+    //X- A Vector 3 to calculate coordinate in case the grid moves or the scale changes
     public Vector3 TileCoordToWorldCoord(int x, float y, int z)
     {
         return new Vector3(x, y, z); //rn the tiles have the same coordinates in arrays than in the world
@@ -174,61 +202,6 @@ public class GridManager : MonoBehaviour
         }
 
     }*/
-    #endregion
-
-    #region Level Design
-    //5- Creating the level Design
-    //5.1- Creating the deep and shalow sea tiles
-    void GeneratingShallowSea()
-    {
-
-        for (int x = 0; x < collumns; x++)
-        {
-
-            for (int z = 0; z < rows; z++)
-            {
-
-
-
-            }
-
-        }
-
-    }
-    //5.2- Creating the path for the ennemies
-    void GeneratingEnnemiesPath()
-    {
-
-        for (int x = 0; x < collumns; x++)
-        {
-
-            for (int z = 0; z < rows; z++)
-            {
-
-
-
-            }
-
-        }
-
-    }
-    //5.3- Creating points where the boats will check for buildings
-    void CreatingEnnemiesDetection()
-    {
-
-        for (int x = 0; x < collumns; x++)
-        {
-
-            for (int z = 0; z < rows; z++)
-            {
-
-
-
-            }
-
-        }
-
-    }
     #endregion
 
 }
