@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="UI_Test" src="UI_Test.uxml" />
+    <ui:Instance template="UI_Test" name="UI_Test" />
+</ui:UXML>
