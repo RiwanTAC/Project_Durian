@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="UI_Test" src="UI_Test.uxml" />
+    <ui:Instance template="UI_Test" name="UI_Test" />
+    <ui:VisualElement name="Screen" style="height: 100%; width: 100%; align-items: stretch; justify-content: center; flex-direction: row; flex-basis: auto; flex-shrink: 1; flex-grow: 0;">
+        <ui:VisualElement style="width: 274px; flex-direction: column-reverse; align-items: stretch; height: 310px; top: 50px;" />
+    </ui:VisualElement>
+</ui:UXML>
