@@ -33,15 +33,7 @@ public class EditModeGridGenerator : MonoBehaviour
         
         tilesGoArray = new GameObject[collumns, rows];
 
-        levelDesign.tilesStateArray = new int[collumns, rows];
-
-        for (int x = 0; x < collumns; x++)
-        {
-            for (int z = 0; z < rows; z++)
-            {
-                levelDesign.tilesStateArray[x, z] = 0;
-            }
-        }
+        levelDesign.tilesStateArray = new int[collumns * rows];
 
         GenerateEditModeGrid();
 
@@ -84,9 +76,13 @@ public class EditModeGridGenerator : MonoBehaviour
 
                 ct.gm = this.gm;
 
+                //Adding a value too each array's cell
+                levelDesign.tilesStateArray[x * collumns + z] = 5;
+
             }
 
         }
+        print(levelDesign.tilesStateArray.Length);
 
     }
 

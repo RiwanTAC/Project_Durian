@@ -155,10 +155,10 @@ public class Tile : MonoBehaviour
     private void paintingTiles()
     {
         if(gm.numberOfTile > 0)
-        if (isDeepSea == true)
+        if (isShallowSea == true)
         {
             isBeach = true;
-            isDeepSea = false;
+            isShallowSea = false;
 
             this.GetComponent<MeshRenderer>().material = beachMaterial;
             this.transform.position = new Vector3(tileX, elevation, tileZ);
@@ -176,11 +176,11 @@ public class Tile : MonoBehaviour
         if (isBeach == true || isPlain == true && isBase == false)
         {
 
-            isDeepSea = true;
+            isShallowSea = true;
             isBeach = false;
             isPlain = false;
 
-            this.GetComponent<MeshRenderer>().material = seaMaterial;
+            this.GetComponent<MeshRenderer>().material = shallowSeaHoverMaterial;
             this.transform.position = new Vector3(tileX, -elevation, tileZ);
 
             gm.numberOfTile = gm.numberOfTile + 1;
@@ -220,7 +220,7 @@ public class Tile : MonoBehaviour
                             GameObject _tileToCheck = grid.tilesGoArray[tileToCheck.GetComponent<Tile>().tileX + Mathf.RoundToInt(m.x), tileToCheck.GetComponent<Tile>().tileZ + Mathf.RoundToInt(m.y)]; //changed the reference tile to the tile we are currently checking
 
                             //If the tile is a beach it will chek the neighbouring tiles to be sure they are as well
-                            if (_tileToCheck.GetComponent<Tile>().isBeach == true || _tileToCheck.GetComponent<Tile>().isPlain == true)
+                            if (_tileToCheck.GetComponent<Tile>().isBeach == true || _tileToCheck.GetComponent<Tile>().isPlain == true || _tileToCheck.GetComponent<Tile>().isBase == true)
                             {
 
                                 _nbAdjSide++;

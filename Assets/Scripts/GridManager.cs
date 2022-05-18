@@ -23,7 +23,7 @@ public class GridManager : MonoBehaviour
     int[,] tilesDetecPathArray; // will be used to store the tiles that are for the possition where the boat will stop and check for the player's buildings
 
     //1.5- Level Design
-    public LevelDesign levelDesign;
+    public LevelDesign _levelDesign;
 
     //public Node[,] graph;
 
@@ -32,13 +32,12 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         //2.1- Setting up the Arrays
-        tilesStateArray = new int[collumns, rows];
         tilesGoArray = new GameObject[collumns, rows];
         tilesPathArray = new int[collumns, rows];
         tilesDetecPathArray = new int[collumns, rows];
+        //_levelDesign.tilesStateArray = new int[collumns * rows];
 
-        tilesStateArray = levelDesign.tilesStateArray;
-        print(levelDesign.tilesStateArray.Length);
+        print(_levelDesign.tilesStateArray.Length);
 
         GenerateGrid();
 
@@ -145,18 +144,19 @@ public class GridManager : MonoBehaviour
                 ct.gm = this.gm;
 
                 //will be used to store the state of the tiles between: Deep Sea: 0, Shallow Sea: 1, and Base: 2
-                if (tilesStateArray[x, z] == 2)
+                if (_levelDesign.tilesStateArray[x * collumns + z] == 2)
                 {
                     ct.isBase = true;
                     ct.isPlain = true;
                     ct.GetComponent<MeshRenderer>().material = ct.plainMaterial;
+                    ct.transform.position = new Vector3(ct.tileX, ct.elevation, ct.tileZ);
                 }
-                else if (tilesStateArray[x, z] == 1)
+                else if (_levelDesign.tilesStateArray[x * collumns + z] == 1)
                 {
                     ct.isShallowSea = true;
                     ct.GetComponent<MeshRenderer>().material = ct.shallowSeaMaterial;
                 }
-                else if (tilesStateArray[x, z] == 0)
+                else if (_levelDesign.tilesStateArray[x * collumns + z] == 5)
                 {
                     ct.isDeepSea = true;
                     ct.GetComponent<MeshRenderer>().material = ct.seaMaterial;

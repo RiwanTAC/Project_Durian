@@ -41,8 +41,8 @@ public class EditModeTile : MonoBehaviour
 
             this.GetComponent<MeshRenderer>().material = shallowSeaMaterial;
 
-            grid.levelDesign.tilesStateArray[tileX, tileZ] = 1;
-            
+            grid.levelDesign.tilesStateArray[tileX * grid.collumns + tileZ] = 1;
+
         }
 
         if (isBase == true)
@@ -52,8 +52,21 @@ public class EditModeTile : MonoBehaviour
 
             this.GetComponent<MeshRenderer>().material = plainMaterial;
 
-            grid.levelDesign.tilesStateArray[tileX, tileZ] = 2;
-            
+            grid.levelDesign.tilesStateArray[tileX * grid.collumns + tileZ] = 2;
+
+        }
+
+        if (isDeepSea == true)
+        {
+
+            isBase = false;
+            isShallowSea = false;
+
+            this.GetComponent<MeshRenderer>().material = seaMaterial;
+
+            grid.levelDesign.tilesStateArray[tileX * grid.collumns + tileZ] = 5;
+
+
         }
 
     }

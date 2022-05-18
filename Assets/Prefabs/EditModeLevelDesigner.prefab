@@ -46,6 +46,6 @@ MonoBehaviour:
   gm: {fileID: 0}
   tilesHolder: {fileID: 102406141121907590}
   tile: {fileID: 3567703651406137820, guid: 2a3d2e86e45f99b4c99c63b80296c5ff, type: 3}
-  collumns: 100
-  rows: 100
-  levelDesign: {fileID: 11400000, guid: 749bad08273dba2409cf4cf717153b6d, type: 2}
+  collumns: 50
+  rows: 50
+  levelDesign: {fileID: 0}

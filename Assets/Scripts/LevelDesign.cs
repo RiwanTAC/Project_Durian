@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Level", menuName = "Create a New Level")]
 public class LevelDesign : ScriptableObject
 {
+    [SerializeField]
+    public int[] tilesStateArray;
 
-    public int[,] tilesStateArray;
+    public bool wasModified;
 
 }

@@ -15,11 +15,14 @@ public class GameMaster : MonoBehaviour
     //1.3- En Turn
     public int teamTurn = 1; //1 = player's turn and 2 = ennemis' turn
 
+    public LevelDesign _levelDesign;
+
     //2- Void Start
     private void Start()
     {
         //2.1- Reseting the Number of tile every game restart
         numberOfTile = 50;
+
     }
 
     //3- Void Start
