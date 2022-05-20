@@ -20,6 +20,6 @@ public class NumberOfTiles : MonoBehaviour
     // Updating number of tile
     private void Update()
     {
-        scoreText.text = "Number of Tiles left: " + gm.numberOfTile.ToString();
+        scoreText.text = gm.numberOfTile.ToString();
     }
 }

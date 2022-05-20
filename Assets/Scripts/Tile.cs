@@ -44,6 +44,9 @@ public class Tile : MonoBehaviour
         new Vector2(-1, -1),
     };
 
+    //1.5- Buidling
+    public GameObject towerImage, barrackImage, incomeImage;
+
     #region OLD Path Finding (References)
     //1.5- Pathfinding
     //public float moveCost = 1;
@@ -52,8 +55,10 @@ public class Tile : MonoBehaviour
     //2- Setting everything up
     private void Start()
     {
-        
-        
+
+        towerImage.SetActive(false);
+        barrackImage.SetActive(false);
+        incomeImage.SetActive(false);
 
     }
 
@@ -71,18 +76,25 @@ public class Tile : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-
-            paintingTiles();
-            checkingTiles();
-
-
+            if (gm.isInPaintingMode)
+            {
+                paintingTiles();
+                checkingTiles();
+            }
+            else if(gm.isInBuildingMode == true)
+            {
+                Build();
+            }
+                
         }
         if (Input.GetMouseButtonDown(1))
         {
-
-            deletingTiles();
-            checkingTiles();
-
+            if (gm.isInPaintingMode)
+            {
+                deletingTiles();
+                checkingTiles();
+            }
+                
         }
 
     }
@@ -111,7 +123,24 @@ public class Tile : MonoBehaviour
         }
         else if (isPlain == true)
         {
+
             this.GetComponent<MeshRenderer>().material = plainHoverMaterial;
+
+            if (gm.buildMode.isBuildingTower)
+            {
+                towerImage.SetActive(true);
+            }else if (gm.buildMode.isBuildingBarrack)
+            {
+                towerImage.SetActive(true);
+            }else if (gm.buildMode.isBuildingMoney)
+            {
+                towerImage.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("we have a problem captain");
+            }
+
         }
         else if(isShallowSea == true)
         {
@@ -138,6 +167,24 @@ public class Tile : MonoBehaviour
         else if (isPlain == true)
         {
             this.GetComponent<MeshRenderer>().material = plainMaterial;
+
+            if (gm.buildMode.isBuildingTower)
+            {
+                towerImage.SetActive(false);
+            }
+            else if (gm.buildMode.isBuildingBarrack)
+            {
+                towerImage.SetActive(false);
+            }
+            else if (gm.buildMode.isBuildingMoney)
+            {
+                towerImage.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("we have a problem captain");
+            }
+
         }
         else if(isShallowSea == true)
         {
@@ -154,38 +201,39 @@ public class Tile : MonoBehaviour
     //5.1- Painting the map
     private void paintingTiles()
     {
-        if(gm.numberOfTile > 0)
-        if (isShallowSea == true)
-        {
-            isBeach = true;
-            isShallowSea = false;
+ 
+            if(gm.numberOfTile > 0)
+                if (isShallowSea == true)
+                {
+                    isBeach = true;
+                    isShallowSea = false;
 
-            this.GetComponent<MeshRenderer>().material = beachMaterial;
-            this.transform.position = new Vector3(tileX, elevation, tileZ);
+                    this.GetComponent<MeshRenderer>().material = beachMaterial;
+                    this.transform.position = new Vector3(tileX, elevation, tileZ);
 
-            gm.numberOfTile = gm.numberOfTile - 1;
+                    gm.numberOfTile = gm.numberOfTile - 1;
 
-        }
+                }
 
     }
 
     //5.2- Deleting the map
     private void deletingTiles()
     {
+        if (gm.isInPaintingMode)
+            if (isBeach == true || isPlain == true && isBase == false)
+            {
 
-        if (isBeach == true || isPlain == true && isBase == false)
-        {
+                isShallowSea = true;
+                isBeach = false;
+                isPlain = false;
 
-            isShallowSea = true;
-            isBeach = false;
-            isPlain = false;
+                this.GetComponent<MeshRenderer>().material = shallowSeaHoverMaterial;
+                this.transform.position = new Vector3(tileX, -elevation, tileZ);
 
-            this.GetComponent<MeshRenderer>().material = shallowSeaHoverMaterial;
-            this.transform.position = new Vector3(tileX, -elevation, tileZ);
+                gm.numberOfTile = gm.numberOfTile + 1;
 
-            gm.numberOfTile = gm.numberOfTile + 1;
-
-        }
+            }
 
     }
 
@@ -336,6 +384,43 @@ public class Tile : MonoBehaviour
             }
 
         }
+
+    }
+
+    //7- Building Stuff
+    void Build()
+    {
+        if (isPlain == true)
+        {
+            if (gm.buildMode.isBuildingTower == true)
+            {
+
+                GameObject _thisBuilding = Instantiate(gm.buildMode.tower, new Vector3(tileX, gm.buildMode.towerElevation, tileZ), Quaternion.identity) as GameObject;
+                gm.buildMode.isBuildingTower = false;
+                gm.moneyAmount = gm.moneyAmount - gm.buildMode.towerCost;
+
+            }
+            else if (gm.buildMode.isBuildingMoney == true)
+            {
+
+                GameObject _thisBuilding = Instantiate(gm.buildMode.moneyGen, new Vector3(tileX, gm.buildMode.moneyElevation, tileZ), Quaternion.identity) as GameObject;
+                gm.buildMode.isBuildingMoney = false;
+                gm.moneyAmount = gm.moneyAmount - gm.buildMode.incomeCost;
+
+            }
+            else if (gm.buildMode.isBuildingBarrack == true)
+            {
+
+                GameObject _thisBuilding = Instantiate(gm.buildMode.barrack, new Vector3(tileX, gm.buildMode.barrackElevation, tileZ), Quaternion.identity) as GameObject;
+                gm.buildMode.isBuildingBarrack = false;
+                gm.moneyAmount = gm.moneyAmount - gm.buildMode.barrackCost;
+
+            }
+            else
+            {
+                Debug.Log("we have a problem captain");
+            }
+        }        
 
     }
 
