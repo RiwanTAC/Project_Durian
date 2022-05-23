@@ -11,13 +11,13 @@ public class NumberOfTiles : MonoBehaviour
 
     public Text scoreText;
 
-    // Void Start
+    //2- Void Start
     private void Start()
     {
         gm = FindObjectOfType<GameMaster>();
     }
 
-    // Updating number of tile
+    //3- Updating number of tile
     private void Update()
     {
         scoreText.text = gm.numberOfTile.ToString();

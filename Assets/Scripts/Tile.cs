@@ -155,7 +155,7 @@ public class Tile : MonoBehaviour
     private void HoveringExit()
     {
 
-        //Checking the tile state
+        //Checking the tile state & applying the correct material
         if (isDeepSea == true)
         {
             this.GetComponent<MeshRenderer>().material = seaMaterial;
@@ -168,6 +168,7 @@ public class Tile : MonoBehaviour
         {
             this.GetComponent<MeshRenderer>().material = plainMaterial;
 
+            //Checking if the player is in building mode it will display the buildings on plains tiles
             if (gm.buildMode.isBuildingTower)
             {
                 towerImage.SetActive(false);
@@ -390,8 +391,10 @@ public class Tile : MonoBehaviour
     //7- Building Stuff
     void Build()
     {
+        //Checking if the tiles is a plain
         if (isPlain == true)
         {
+            //Checking in what building mode the player is, insatantiate the building & applying the cost
             if (gm.buildMode.isBuildingTower == true)
             {
 

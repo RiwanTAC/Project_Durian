@@ -58,11 +58,4 @@ public class GameMaster : MonoBehaviour
 
     }
 
-    private void GenerateMoney(float _templeMoney, float _buildingMoney)
-    {
-
-        
-
-    }
-
 }

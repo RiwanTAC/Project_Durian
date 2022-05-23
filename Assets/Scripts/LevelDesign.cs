@@ -8,6 +8,4 @@ public class LevelDesign : ScriptableObject
     [SerializeField]
     public int[] tilesStateArray;
 
-    public bool wasModified;
-
 }

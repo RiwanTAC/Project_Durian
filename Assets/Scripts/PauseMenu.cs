@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     //2- Void Start
     private void Start()
     {
+        //just to be sure it is not actiated
         pauseMenuUI.SetActive(false);
     }
 
@@ -60,7 +61,7 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
 
-        print("Quitting game...");
+        print("Quitting game..."); //because in the editor nothing happens
         Application.Quit();
 
     }
