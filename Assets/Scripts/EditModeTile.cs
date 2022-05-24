@@ -18,12 +18,13 @@ public class EditModeTile : MonoBehaviour
     public bool isWalkable, isShallowSea, isDeepSea, isPlain, isBase;
 
     //1.3- Painting
-    public Material seaMaterial, shallowSeaMaterial, plainMaterial;
+    public Material seaMaterial, shallowSeaMaterial, plainMaterial, pathMaterial;
     public float elevation;
 
+    //2- Awake
     private void Awake()
     {
-
+        //by default it will be deepsea and not walkable
         this.GetComponent<MeshRenderer>().material = seaMaterial;
 
         isWalkable = false;
@@ -31,9 +32,11 @@ public class EditModeTile : MonoBehaviour
 
     }
 
+    //3- Void Update
     private void Update()
     {
-        
+        //Will change the information in the array when you change the bool in the properties of the tile
+
         if(isShallowSea == true)
         {
 
@@ -66,6 +69,17 @@ public class EditModeTile : MonoBehaviour
 
             grid.levelDesign.tilesStateArray[tileX * grid.collumns + tileZ] = 5;
 
+
+        }
+
+        if (isWalkable == true)
+        {
+
+            isDeepSea = false;
+
+            this.GetComponent<MeshRenderer>().material = pathMaterial;
+
+            grid.levelDesign.tilesStateArray[tileX * grid.collumns + tileZ] = 8;
 
         }
 

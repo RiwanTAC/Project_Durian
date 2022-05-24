@@ -23,6 +23,7 @@ public class EditModeGridGenerator : MonoBehaviour
 
     //1.5- Level Design
     public LevelDesign levelDesign; //will be used to store the state of the tiles between: Deep Sea: 0, Shallow Sea: 1, and Base: 2
+    public LevelDesign _levelDesign;
 
     //2- Void Awake
     private void Awake()
@@ -77,11 +78,14 @@ public class EditModeGridGenerator : MonoBehaviour
                 ct.gm = this.gm;
 
                 //Adding a value too each array's cell
-                levelDesign.tilesStateArray[x * collumns + z] = 5;
+                //levelDesign.tilesStateArray[x * collumns + z] = 5;
+
+                //ADD THE LEVEL 1 MAP
 
             }
 
         }
+
         print(levelDesign.tilesStateArray.Length);
 
     }
